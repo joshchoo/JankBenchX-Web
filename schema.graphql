@@ -1,0 +1,32 @@
+type Device {
+  run_id: Int!
+  benchmark_version: String!
+  device_name: String!
+  device_model: String!
+  device_product: String!
+  device_board: String!
+  device_manufacturer: String!
+  device_brand: String!
+  device_hardware: String!
+  android_version: String!
+  build_type: String!
+  build_time: String!
+  fingerprint: String!
+  kernel_version: String
+  results: [Result!]!
+}
+
+type Result {
+  device: Device
+  test_name: String!
+  score: Int!
+  jank_penalty: Int!
+  consistency_bonus: Int!
+  jank_pct: Float!
+  bad_frame_pct: Float!
+  total_frames: Int!
+  ms_avg: Float!
+  ms_90th_pctl: Float!
+  ms_95th_pctl: Float!
+  ms_99th_pctl: Float!
+}
