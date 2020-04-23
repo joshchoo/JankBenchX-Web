@@ -1,4 +1,4 @@
-type Result @collection(name: "benchmark_results") {
+type Result {
   run_id: Int! @unique
   benchmark_version: String!
   device_name: String!
