@@ -29,3 +29,7 @@ type Test @embedded {
   ms_95th_pctl: Float!
   ms_99th_pctl: Float!
 }
+
+type Query {
+  allResults: [Result]!
+}

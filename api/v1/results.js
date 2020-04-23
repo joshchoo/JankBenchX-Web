@@ -12,12 +12,10 @@ module.exports = async (req, res) => {
     try {
       // TODO: Return all data instead of paginated?
       const response = await client.query(
-        q.Map(q.Paginate(q.Match(q.Index('all_benchmark_results'))), (ref) =>
-          q.Get(ref)
-        )
+        q.Map(q.Paginate(q.Match(q.Index('allResults'))), (ref) => q.Get(ref))
       );
 
-      // TODO: Format data -> convert ts to proper timestamp
+      // TODO: in client: convert ts to proper timestamp -> Date(_ts)
       const data = response.data;
 
       return res.status(200).json({ results: data });
@@ -32,20 +30,8 @@ module.exports = async (req, res) => {
       return res.status(400).json({ message: error.errors });
     }
 
-    const { run_id } = data;
     try {
-      await client.query(q.Get(q.Match(q.Index('results_by_runid'), run_id)));
-      return res
-        .status(400)
-        .json({ message: 'Cannot upload duplicate results' });
-    } catch (error) {
-      // Do nothing
-    }
-
-    try {
-      await client.query(
-        q.Create(q.Collection('benchmark_results'), { data: data })
-      );
+      await client.query(q.Create(q.Collection('Result'), { data: data }));
 
       return res.status(201).json({ message: 'Results uploaded successfully' });
     } catch (error) {
