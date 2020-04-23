@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { ResultTile } from '../result-tile/ResultTile';
+import { Result } from '../../types';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
   {
@@ -33,12 +34,12 @@ export const BenchmarkResults: React.FC = () => {
   console.log(data);
 
   return (
-    <Fragment>
+    <>
       {data.allResults &&
         data.allResults.data &&
-        data.allResults.data.map((result: any) => (
+        data.allResults.data.map((result: Result) => (
           <ResultTile key={result._id} result={result} />
         ))}
-    </Fragment>
+    </>
   );
 };
