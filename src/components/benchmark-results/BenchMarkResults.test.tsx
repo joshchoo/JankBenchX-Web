@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { MockedProvider } from '@apollo/client/testing';
+import { renderApollo } from '../../test-utils';
+
 import {
   BenchmarkResults,
   GET_BENCHMARK_RESULTS_QUERY,
@@ -17,9 +17,5 @@ const mocks = [
 ];
 
 test('renders without error', () => {
-  render(
-    <MockedProvider mocks={mocks}>
-      <BenchmarkResults />
-    </MockedProvider>
-  );
+  renderApollo(<BenchmarkResults />, { mocks: mocks });
 });
