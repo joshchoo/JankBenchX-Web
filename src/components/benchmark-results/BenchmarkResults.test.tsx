@@ -5,7 +5,7 @@ import {
   BenchmarkResults,
   GET_BENCHMARK_RESULTS_QUERY,
 } from './BenchmarkResults';
-import { result } from './benchmarkResults';
+import { result } from './sample-results';
 
 const mocks = [
   {

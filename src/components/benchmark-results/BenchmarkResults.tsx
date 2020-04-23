@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { ResultTile } from '../result-tile/ResultTile';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
   {
     allResults {
       data {
+        _id
         device_name
         device_model
-        device_board
         device_board
         kernel_version
         fingerprint
@@ -23,15 +24,21 @@ export const GET_BENCHMARK_RESULTS_QUERY = gql`
   }
 `;
 
-const renderResults: React.FC = (results) => {
-  return <div>Hello</div>;
-};
-
 export const BenchmarkResults: React.FC = () => {
   const { loading, error, data } = useQuery(GET_BENCHMARK_RESULTS_QUERY);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error :(</div>;
 
-  return renderResults(data);
+  console.log(data);
+
+  return (
+    <Fragment>
+      {data.allResults &&
+        data.allResults.data &&
+        data.allResults.data.map((result: any) => (
+          <ResultTile key={result._id} result={result} />
+        ))}
+    </Fragment>
+  );
 };
