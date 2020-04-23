@@ -33,15 +33,13 @@ export const BenchmarkResults: React.FC = () => {
   if (loading) return <LoadingSpinner />;
   if (error) return <div>Error :(</div>;
 
-  console.log(data);
-
   return (
-    <>
+    <div className="results-container">
       {data.allResults &&
         data.allResults.data &&
         data.allResults.data.map((result: Result) => (
           <ResultTile key={result._id} result={result} />
         ))}
-    </>
+    </div>
   );
 };
