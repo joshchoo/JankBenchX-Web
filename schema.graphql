@@ -1,5 +1,5 @@
-type Device {
-  run_id: Int!
+type Device @collection(name: "benchmark_results") {
+  run_id: Int! @unique
   benchmark_version: String!
   device_name: String!
   device_model: String!
@@ -16,8 +16,7 @@ type Device {
   results: [Result!]!
 }
 
-type Result {
-  device: Device
+type Result @embedded {
   test_name: String!
   score: Int!
   jank_penalty: Int!
