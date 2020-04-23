@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+
 import { ResultTile } from '../result-tile/ResultTile';
+import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
 import { Result } from '../../types';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
@@ -28,7 +30,7 @@ export const GET_BENCHMARK_RESULTS_QUERY = gql`
 export const BenchmarkResults: React.FC = () => {
   const { loading, error, data } = useQuery(GET_BENCHMARK_RESULTS_QUERY);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>Error :(</div>;
 
   console.log(data);

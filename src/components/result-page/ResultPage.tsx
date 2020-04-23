@@ -1,6 +1,8 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 
+import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
+
 const GET_RESULT = gql`
   query findResultById($id: ID!) {
     findResultByID(id: $id) {
@@ -46,7 +48,7 @@ export const ResultPage: React.FC<any> = ({
     variables: { id: resultId },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>error :(</div>;
 
   const result = data.findResultByID;
