@@ -34,7 +34,7 @@ export const BenchmarkResults: React.FC = () => {
   if (error) return <div>Error :(</div>;
 
   return (
-    <div className="results-container">
+    <div className="mx-2">
       {data.allResults &&
         data.allResults.data &&
         data.allResults.data.map((result: Result) => (
