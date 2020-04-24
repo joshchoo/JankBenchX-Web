@@ -52,7 +52,6 @@ export const ResultPage: React.FC<any> = ({
   });
 
   if (loading) return <LoadingSpinner />;
-  console.log(error);
   if (error) return <div>error :(</div>;
 
   const result: ResultAll = data.findResultByID;
