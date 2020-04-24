@@ -1,14 +1,6 @@
 import React from 'react';
 import { Result } from '../../types';
-import { faunaTimestampToDate } from '../../utils/datetime';
-
-const formatDateTime = (date: Date) => {
-  return `${date.toLocaleDateString('default', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })}`;
-};
+import { faunaTimestampToDate, formatDateTime } from '../../utils/datetime';
 
 const shortenKernelText = (kernelVersion: string) => {
   const kernelRegex = /[0-9]([^\s]+)/;
