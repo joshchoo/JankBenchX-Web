@@ -25,7 +25,7 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
     <div className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg">
       <div className="">
         <div className="p-4 text-center rounded-t">
-          <div className="text-2xl font-medium sm:text-2xl">{`${result.device_name} - ${result.device_model}`}</div>
+          <div className="text-2xl font-medium">{`${result.device_name} - ${result.device_model}`}</div>
           <div className="text-sm">
             {shortenKernelText(result.kernel_version)}
           </div>
@@ -36,13 +36,9 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
             <thead>
               <tr className="result__table-header">
                 <th />
-                <th className="text-center font-light sm:text-lg sm:font-normal">
-                  Score
-                </th>
-                <th className="text-center font-light sm:text-lg sm:font-normal">
-                  Jank
-                </th>
-                <th className="hidden text-center font-light sm:table-cell sm:text-lg sm:font-normal">
+                <th className="text-center font-light">Score</th>
+                <th className="text-center font-light">Jank</th>
+                <th className="hidden text-center font-light sm:table-cell">
                   Bad Frames
                 </th>
               </tr>
@@ -51,14 +47,14 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
               {result.results.map((res) => {
                 return (
                   <tr key={res.test_name}>
-                    <td className="mr-auto px-2 py-1 sm:text-lg">
+                    <td className="mr-auto px-2 py-1 sm:py-2">
                       {res.test_name}
                     </td>
-                    <td className="text-center text-xl font-bold px-2 sm:text-2xl">
+                    <td className="text-center text-xl font-bold px-2">
                       {res.score}
                     </td>
-                    <td className="text-center text-xl font-bold px-2 sm:text-2xl">{`${res.jank_pct}%`}</td>
-                    <td className="hidden text-center text-xl font-bold px-2 sm:table-cell sm:text-2xl">
+                    <td className="text-center text-xl font-bold px-2">{`${res.jank_pct}%`}</td>
+                    <td className="hidden text-center text-xl font-bold px-2 sm:table-cell">
                       {`${res.bad_frame_pct}%`}
                     </td>
                   </tr>
