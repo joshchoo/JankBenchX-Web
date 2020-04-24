@@ -12,9 +12,15 @@ const shortenKernelText = (kernelVersion: string) => {
   }
 };
 
-export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
+export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
+  result,
+  onClick = () => {},
+}) => {
   return (
-    <div className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer">
+    <div
+      className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer"
+      onClick={onClick}
+    >
       <div className="">
         <div className="p-4 text-center rounded-t">
           <div className="text-2xl font-medium">{`${result.device_name} - ${result.device_model}`}</div>

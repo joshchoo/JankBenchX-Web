@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 import { ResultTile } from '../result-tile/ResultTile';
 import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
@@ -29,6 +30,7 @@ export const GET_BENCHMARK_RESULTS_QUERY = gql`
 
 export const BenchmarkResults: React.FC = () => {
   const { loading, error, data } = useQuery(GET_BENCHMARK_RESULTS_QUERY);
+  const history = useHistory();
 
   if (loading) return <LoadingSpinner />;
   if (error) return <div>Error :(</div>;
@@ -38,7 +40,11 @@ export const BenchmarkResults: React.FC = () => {
       {data.allResults &&
         data.allResults.data &&
         data.allResults.data.map((result: Result) => (
-          <ResultTile key={result._id} result={result} />
+          <ResultTile
+            key={result._id}
+            result={result}
+            onClick={() => history.push(`/results/${result._id}`)}
+          />
         ))}
     </div>
   );
