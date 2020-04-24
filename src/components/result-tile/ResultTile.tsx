@@ -24,9 +24,9 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
   return (
     <div className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg">
       <div className="">
-        <div className="p-4 text-center rounded-t bg-gray-900 text-gray-100">
+        <div className="p-4 text-center rounded-t">
           <div className="text-2xl font-medium sm:text-2xl">{`${result.device_name} - ${result.device_model}`}</div>
-          <div className="text-gray-100 text-sm">
+          <div className="text-sm">
             {shortenKernelText(result.kernel_version)}
           </div>
         </div>
