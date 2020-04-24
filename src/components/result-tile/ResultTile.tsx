@@ -22,7 +22,7 @@ const shortenKernelText = (kernelVersion: string) => {
 
 export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
   return (
-    <div className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg">
+    <div className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer">
       <div className="">
         <div className="p-4 text-center rounded-t">
           <div className="text-2xl font-medium">{`${result.device_name} - ${result.device_model}`}</div>
@@ -36,9 +36,9 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
             <thead>
               <tr className="result__table-header">
                 <th />
-                <th className="text-center font-light">Score</th>
-                <th className="text-center font-light">Jank</th>
-                <th className="hidden text-center font-light sm:table-cell">
+                <th className="pr-2 text-right font-light">Score</th>
+                <th className="pr-2 text-right font-light">Jank Frames</th>
+                <th className="hidden pr-2 text-right font-light sm:table-cell">
                   Bad Frames
                 </th>
               </tr>
@@ -50,11 +50,11 @@ export const ResultTile: React.FC<{ result: Result }> = ({ result }) => {
                     <td className="mr-auto px-2 py-1 sm:py-2">
                       {res.test_name}
                     </td>
-                    <td className="text-center text-xl font-bold px-2">
+                    <td className="text-right text-xl font-bold pr-2">
                       {res.score}
                     </td>
-                    <td className="text-center text-xl font-bold px-2">{`${res.jank_pct}%`}</td>
-                    <td className="hidden text-center text-xl font-bold px-2 sm:table-cell">
+                    <td className="text-right text-xl font-bold pr-2">{`${res.jank_pct}%`}</td>
+                    <td className="hidden text-right text-xl font-bold pr-2 sm:table-cell">
                       {`${res.bad_frame_pct}%`}
                     </td>
                   </tr>
