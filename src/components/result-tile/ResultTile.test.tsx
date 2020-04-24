@@ -15,7 +15,7 @@ const sampleResult = {
   _ts: 1587608543465000,
   results: [
     {
-      test_name: 'List View Fling',
+      test_name: 'Bitmap Upload Test',
       score: 32,
       jank_pct: 12.3,
       bad_frame_pct: 32.7,
@@ -29,6 +29,9 @@ const sampleResult = {
   ],
 };
 
-test('renders without error', () => {
-  render(<ResultTile result={sampleResult} />);
+test('renders without error and with correct data', () => {
+  const { getByText } = render(<ResultTile result={sampleResult} />);
+  expect(getByText(/Bitmap Upload Test/)).toBeInTheDocument();
+  expect(getByText(/Image List View Fling/)).toBeInTheDocument();
+  expect(getByText(/OnePlus6T/)).toBeInTheDocument();
 });
