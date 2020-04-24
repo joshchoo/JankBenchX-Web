@@ -43,5 +43,5 @@ it('navigates to /results/{resultId} when a result tile is clicked', async () =>
 
   fireEvent.click(getByText(/OnePlus6T/));
 
-  expect(window.location.href).toMatch(/results\/8237489274829/);
+  expect(window.location.pathname).toMatch('results/8237489274829');
 });

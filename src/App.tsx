@@ -5,10 +5,12 @@ import { BenchmarkResults } from './components/benchmark-results/BenchmarkResult
 import { ResultsOverview } from './components/results-overview/ResultsOverview';
 
 import './App.css';
+import { Navbar } from './components/navbar/Navbar';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Switch>
         <Route exact path="/" component={BenchmarkResults} />
         <Route path="/results" component={ResultsOverview} />
