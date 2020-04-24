@@ -29,7 +29,7 @@ const sampleResult = {
   ],
 };
 
-test('renders without error and with correct data', () => {
+it('renders without error and with correct data', () => {
   const { getByText } = render(<ResultTile result={sampleResult} />);
   expect(getByText(/Bitmap Upload Test/)).toBeInTheDocument();
   expect(getByText(/Image List View Fling/)).toBeInTheDocument();

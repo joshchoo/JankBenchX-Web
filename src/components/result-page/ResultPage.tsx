@@ -6,7 +6,7 @@ import { ResultAll } from '../../types';
 import { ResultTileDetailed } from '../result-tile-detailed/ResultTileDetailed';
 import { DeviceCard } from '../device-card/DeviceCard';
 
-const GET_RESULT = gql`
+export const GET_RESULT = gql`
   query findResultById($id: ID!) {
     findResultByID(id: $id) {
       _id
@@ -52,6 +52,7 @@ export const ResultPage: React.FC<any> = ({
   });
 
   if (loading) return <LoadingSpinner />;
+  console.log(error);
   if (error) return <div>error :(</div>;
 
   const result: ResultAll = data.findResultByID;
