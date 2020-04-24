@@ -2,6 +2,9 @@ import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 
 import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
+import { ResultAll } from '../../types';
+import { ResultTileDetailed } from '../result-tile-detailed/ResultTileDetailed';
+import { DeviceCard } from '../device-card/DeviceCard';
 
 const GET_RESULT = gql`
   query findResultById($id: ID!) {
@@ -13,8 +16,6 @@ const GET_RESULT = gql`
       device_hardware
       device_model
       device_brand
-      run_id
-      benchmark_version
       device_board
       kernel_version
       build_time
@@ -22,6 +23,8 @@ const GET_RESULT = gql`
       device_manufacturer
       device_product
       _ts
+      benchmark_version
+      run_id
       results {
         test_name
         jank_pct
@@ -51,26 +54,23 @@ export const ResultPage: React.FC<any> = ({
   if (loading) return <LoadingSpinner />;
   if (error) return <div>error :(</div>;
 
-  const result = data.findResultByID;
+  const result: ResultAll = data.findResultByID;
 
-  const {
-    _id,
-    device_name,
-    build_type,
-    fingerprint,
-    device_hardware,
-    device_model,
-    device_brand,
-    run_id,
-    benchmark_version,
-    device_board,
-    kernel_version,
-    build_time,
-    android_version,
-    device_manufacturer,
-    device_product,
-    _ts,
-    results,
-  } = result;
-  return <div>Result</div>;
+  return (
+    <div className="device-container">
+      <div className="px-2">
+        <DeviceCard deviceDetails={result} />
+      </div>
+      <div className="px-2 flex flex-row flex-wrap justify-center items-center">
+        {result.results.map((testDetails) => {
+          return (
+            <ResultTileDetailed
+              testDetails={testDetails}
+              key={testDetails.test_name}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 };
