@@ -30,11 +30,15 @@ export const ResultTileDetailed: React.FC<{ testDetails: TestAll }> = ({
           <div className="text-sm">Score</div>
         </div>
         <div className="flex flex-col justify-center items-center w-1/3">
-          <div className="text-2xl font-bold">{`${jank_pct}%`}</div>
+          <div className="text-2xl font-bold">{`${jank_pct
+            .toFixed(2)
+            .toString()}%`}</div>
           <div className="text-sm">Jank</div>
         </div>
         <div className="flex flex-col justify-center items-center w-1/3">
-          <div className="text-2xl font-bold">{`${bad_frame_pct}%`}</div>
+          <div className="text-2xl font-bold">{`${bad_frame_pct
+            .toFixed(2)
+            .toString()}%`}</div>
           <div className="text-sm">Bad frames</div>
         </div>
       </div>
@@ -57,19 +61,19 @@ export const ResultTileDetailed: React.FC<{ testDetails: TestAll }> = ({
         <div className="py-1 font-bold">Frame Details</div>
         <div className="flex flex-row justify-between w-1/2">
           <div>Average</div>
-          <div>{`${ms_avg} ms`}</div>
+          <div>{`${ms_avg.toFixed(2).toString()} ms`}</div>
         </div>
         <div className="flex flex-row justify-between w-1/2">
           <div>90th %ile</div>
-          <div>{`${ms_90th_pctl} ms`}</div>
+          <div>{`${ms_90th_pctl.toFixed(2).toString()} ms`}</div>
         </div>
         <div className="flex flex-row justify-between w-1/2">
           <div>95th %ile</div>
-          <div>{`${ms_95th_pctl} ms`}</div>
+          <div>{`${ms_95th_pctl.toFixed(2).toString()} ms`}</div>
         </div>
         <div className="flex flex-row justify-between w-1/2">
           <div>99th %ile</div>
-          <div>{`${ms_99th_pctl} ms`}</div>
+          <div>{`${ms_99th_pctl.toFixed(2).toString()} ms`}</div>
         </div>
       </div>
     </div>

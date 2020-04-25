@@ -51,9 +51,11 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
                     <td className="text-right text-xl font-bold pr-2">
                       {res.score}
                     </td>
-                    <td className="text-right text-xl font-bold pr-2">{`${res.jank_pct}%`}</td>
+                    <td className="text-right text-xl font-bold pr-2">{`${res.jank_pct
+                      .toFixed(2)
+                      .toString()}%`}</td>
                     <td className="hidden text-right text-xl font-bold pr-2 sm:table-cell">
-                      {`${res.bad_frame_pct}%`}
+                      {`${res.bad_frame_pct.toFixed(2).toString()}%`}
                     </td>
                   </tr>
                 );
