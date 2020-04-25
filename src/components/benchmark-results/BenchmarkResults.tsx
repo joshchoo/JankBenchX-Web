@@ -39,13 +39,16 @@ export const BenchmarkResults: React.FC = () => {
     <div className="mx-2">
       {data.allResults &&
         data.allResults.data &&
-        data.allResults.data.map((result: Result) => (
-          <ResultTile
-            key={result._id}
-            result={result}
-            onClick={() => history.push(`/results/${result._id}`)}
-          />
-        ))}
+        data.allResults.data
+          .slice(0)
+          .reverse()
+          .map((result: Result) => (
+            <ResultTile
+              key={result._id}
+              result={result}
+              onClick={() => history.push(`/results/${result._id}`)}
+            />
+          ))}
     </div>
   );
 };
