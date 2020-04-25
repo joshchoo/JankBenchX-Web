@@ -30,4 +30,5 @@ exports.resultsSchema = yup.object().shape({
   fingerprint: yup.string().max(120).required(),
   kernel_version: yup.string().max(200),
   results: yup.array().of(testSchema).min(1).required(),
+  refresh_rate: yup.number().integer().required(),
 });

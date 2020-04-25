@@ -25,7 +25,10 @@ module.exports = async (req, res) => {
   } else if (req.method === 'POST') {
     let data;
     try {
-      data = await resultsSchema.validate(req.body);
+      data = await resultsSchema.validate(req.body, {
+        strict: true,
+        stripUnknown: true,
+      });
     } catch (error) {
       return res.status(400).json({ message: error.errors });
     }
