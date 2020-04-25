@@ -19,7 +19,8 @@ const testDetails = {
 
 it('renders without error and with correct data', () => {
   const { getByText } = render(
-    <ResultTileDetailed testDetails={testDetails} />
+    <ResultTileDetailed testDetails={testDetails} refreshRate={90} />
   );
-  expect(getByText(/List View Fling/)).toBeInTheDocument();
+  expect(getByText(/List View Fling/i)).toBeInTheDocument();
+  expect(getByText(/90 Hz/i)).toBeInTheDocument();
 });

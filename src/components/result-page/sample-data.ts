@@ -19,6 +19,7 @@ export const result = {
       kernel_version:
         'Linux version 4.9.179-perf+ (OnePlus@rd-build-75) (gcc version 4.9.x 20150123 (prerelease) (GCC) ) #1 SMP PREEMPT Tue Oct 8 17:52:41 CST 2019',
       run_id: 23940823,
+      refresh_rate: 60,
       results: [
         {
           test_name: 'List View Fling',

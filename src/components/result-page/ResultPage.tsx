@@ -25,6 +25,7 @@ export const GET_RESULT = gql`
       _ts
       benchmark_version
       run_id
+      refresh_rate
       results {
         test_name
         jank_pct
@@ -66,6 +67,7 @@ export const ResultPage: React.FC<any> = ({
           return (
             <ResultTileDetailed
               testDetails={testDetails}
+              refreshRate={result.refresh_rate}
               key={testDetails.test_name}
             />
           );

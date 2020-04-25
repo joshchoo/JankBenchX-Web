@@ -33,6 +33,7 @@ export type ResultAll = {
   benchmark_version: string;
   run_id: number;
   _ts: number;
+  refresh_rate: number;
   results: TestAll[];
 };
 

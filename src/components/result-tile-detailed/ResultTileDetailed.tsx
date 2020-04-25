@@ -1,9 +1,10 @@
 import React from 'react';
 import { TestAll } from '../../types';
 
-export const ResultTileDetailed: React.FC<{ testDetails: TestAll }> = ({
-  testDetails,
-}) => {
+export const ResultTileDetailed: React.FC<{
+  testDetails: TestAll;
+  refreshRate: number;
+}> = ({ testDetails, refreshRate }) => {
   const {
     test_name,
     score,
@@ -45,7 +46,7 @@ export const ResultTileDetailed: React.FC<{ testDetails: TestAll }> = ({
       <div className="p-4 flex flex-row justify-around">
         <div className="flex flex-col justify-center items-center w-1/3">
           {/* TODO: Replace 60 Hz with a variable */}
-          <div className="text-xl">60 Hz</div>
+          <div className="text-xl">{refreshRate} Hz</div>
           <div className="text-sm">Refresh rate</div>
         </div>
         <div className="flex flex-col justify-center items-center w-1/3">
