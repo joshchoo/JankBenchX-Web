@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
+import * as Sentry from '@sentry/browser';
 
 import { ResultTile } from '../result-tile/ResultTile';
 import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
@@ -34,7 +35,10 @@ export const BenchmarkResults: React.FC = () => {
   const history = useHistory();
 
   if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorPage />;
+  if (error) {
+    Sentry.captureException(error);
+    return <ErrorPage />;
+  }
 
   return (
     <div className="mx-2">

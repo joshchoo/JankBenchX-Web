@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
+import * as Sentry from '@sentry/browser';
 
 import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
 import { ResultAll } from '../../types';
@@ -55,7 +56,10 @@ export const ResultPage: React.FC<any> = ({
   });
 
   if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorPage />;
+  if (error) {
+    Sentry.captureException(error);
+    return <ErrorPage />;
+  }
 
   const result: ResultAll = data.findResultByID;
 
