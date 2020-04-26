@@ -5,6 +5,7 @@ import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
 import { ResultAll } from '../../types';
 import { ResultTileDetailed } from '../result-tile-detailed/ResultTileDetailed';
 import { DeviceCard } from '../device-card/DeviceCard';
+import { NotFound } from '../not-found/NotFound';
 
 export const GET_RESULT = gql`
   query findResultById($id: ID!) {
@@ -56,6 +57,10 @@ export const ResultPage: React.FC<any> = ({
   if (error) return <div>error :(</div>;
 
   const result: ResultAll = data.findResultByID;
+
+  if (!result) {
+    return <NotFound />;
+  }
 
   return (
     <div className="device-container">
