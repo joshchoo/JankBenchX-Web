@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
         q.Map(q.Paginate(q.Match(q.Index('allResults'))), (ref) => q.Get(ref))
       );
 
-      // TODO: in client: convert ts to proper timestamp -> Date(_ts)
       const data = response.data;
 
       return res.status(200).json({ results: data });
@@ -26,7 +25,7 @@ module.exports = async (req, res) => {
     let data;
     try {
       data = await resultsSchema.validate(req.body, {
-        strict: true,
+        strict: false, // allow transformations to be applied
         stripUnknown: true,
       });
     } catch (error) {

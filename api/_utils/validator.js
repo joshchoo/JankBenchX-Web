@@ -1,17 +1,43 @@
 const yup = require('yup');
+const faunadb = require('faunadb');
+const q = faunadb.query;
+
+/*
+ By default, Javascript serializes floats with trailing zeroes in the decimal places into integers (i.e '1.0' becomes '1')
+ Fauna interprets integer-looking floats as integers, and stores them as integers.
+ However, Fauna sends errors when using their GraphQL API to request this stored integer as a float.
+ To force Fauna to interpret our number as a float-type, we need to transform our numbers with query.ToDouble() method.
+ */
+yup.addMethod(yup.object, 'toDouble', function () {
+  return this.transform(function (value, originalValue) {
+    if (typeof originalValue !== 'number') {
+      return value;
+    }
+
+    return q.ToDouble(originalValue);
+  });
+});
+
+const faunaDouble = yup
+  .object({
+    raw: yup.object({
+      to_double: yup.number().required(),
+    }),
+  })
+  .toDouble();
 
 const testSchema = yup.object().shape({
   test_name: yup.string().max(80).required(),
   score: yup.number().integer().required(),
   jank_penalty: yup.number().integer().required(),
   consistency_bonus: yup.number().integer().required(),
-  jank_pct: yup.number().required(),
-  bad_frame_pct: yup.number().required(),
+  jank_pct: faunaDouble.required(),
+  bad_frame_pct: faunaDouble.required(),
   total_frames: yup.number().integer().required(),
-  ms_avg: yup.number().required(),
-  ms_90th_pctl: yup.number().required(),
-  ms_95th_pctl: yup.number().required(),
-  ms_99th_pctl: yup.number().required(),
+  ms_avg: faunaDouble.required(),
+  ms_90th_pctl: faunaDouble.required(),
+  ms_95th_pctl: faunaDouble.required(),
+  ms_99th_pctl: faunaDouble.required(),
 });
 
 exports.resultsSchema = yup.object().shape({
