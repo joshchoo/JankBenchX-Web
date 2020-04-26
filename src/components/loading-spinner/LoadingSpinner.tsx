@@ -4,7 +4,7 @@ import styles from './spinner.module.css';
 
 export const LoadingSpinner = () => {
   return (
-    <div className={styles['spinner-overlay']}>
+    <div data-testid="spinner" className={styles['spinner-overlay']}>
       <div className={styles['spinner-container']} />
     </div>
   );
