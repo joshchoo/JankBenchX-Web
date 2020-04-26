@@ -16,6 +16,8 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
   result,
   onClick = () => {},
 }) => {
+  const date = faunaTimestampToDate(result._ts);
+
   return (
     <div
       className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer"
@@ -67,7 +69,13 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
       <div className="flex justify-between items-center px-4 py-2 rounded-b text-sm bg-gray-900 text-gray-100">
         <div className="">{`ID: ${result._id}`}</div>
         <div className="">
-          {formatDateTime(faunaTimestampToDate(result._ts))}
+          {`${formatDateTime(date)} - ${date
+            .getUTCHours()
+            .toString()
+            .padStart(2, '0')}:${date
+            .getUTCMinutes()
+            .toString()
+            .padStart(2, '0')}`}
         </div>
       </div>
     </div>

@@ -26,9 +26,16 @@ export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
       <div className="flex flex-row justify-between px-4 py-2 rounded-t bg-gray-900 text-gray-100">
         <div className="text-sm">{`ID: ${_id}`}</div>
         <div className="text-sm">
-          {`${formatDateTime(
-            date
-          )} - ${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`}
+          {`${formatDateTime(date)} - ${date
+            .getUTCHours()
+            .toString()
+            .padStart(2, '0')}:${date
+            .getUTCMinutes()
+            .toString()
+            .padStart(2, '0')}:${date
+            .getUTCSeconds()
+            .toString()
+            .padStart(2, '0')}`}
         </div>
       </div>
       <div className="">
