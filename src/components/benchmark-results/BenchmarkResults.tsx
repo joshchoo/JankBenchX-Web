@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { ResultTile } from '../result-tile/ResultTile';
 import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
 import { Result } from '../../types';
+import { ErrorPage } from '../error-page/ErrorPage';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
   {
@@ -33,7 +34,7 @@ export const BenchmarkResults: React.FC = () => {
   const history = useHistory();
 
   if (loading) return <LoadingSpinner />;
-  if (error) return <div>Error :(</div>;
+  if (error) return <ErrorPage />;
 
   return (
     <div className="mx-2">
