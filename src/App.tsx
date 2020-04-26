@@ -7,6 +7,7 @@ import { Navbar } from './components/navbar/Navbar';
 import { NotFound } from './components/not-found/NotFound';
 
 import './App.css';
+import { AboutPage } from './components/about-page/AboutPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={BenchmarkResults} />
+        <Route exact path="/about" component={AboutPage} />
         <Route path="/results" component={ResultsOverview} />
         <Route component={NotFound} />
       </Switch>
