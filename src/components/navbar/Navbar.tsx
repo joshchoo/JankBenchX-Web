@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
           </span>
         </Link>
       </div>
-      <div className="block lg:hidden px-4">
+      <div className="block sm:hidden px-4">
         <button
           className="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white"
           onClick={() => toggleHidden(!hidden)}
@@ -31,12 +31,12 @@ export const Navbar: React.FC = () => {
       <div
         className={`w-full ${
           hidden ? 'hidden' : 'block'
-        } flex-grow lg:flex lg:items-center lg:w-auto px-2`}
+        } flex-grow sm:flex sm:items-center sm:w-auto px-2`}
       >
-        <div className="text-sm lg:flex-grow">
+        <div className="text-sm sm:flex-grow">
           <Link
             to="/about"
-            className="block mt-3 lg:inline-block lg:mt-0 text-gray-200 mr-4 px-2 py-1 rounded hover:bg-gray-800"
+            className="block mt-3 sm:inline-block sm:mt-0 text-gray-200 mr-4 px-2 py-1 rounded hover:bg-gray-800"
           >
             About
           </Link>
@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
             href="https://github.com/joshuous/JankBenchX/releases"
             rel="noopener noreferrer"
             target="_blank"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-900 hover:bg-white mt-4 lg:mt-0"
+            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-900 hover:bg-white mt-4 sm:mt-0"
           >
             Download
           </a>
