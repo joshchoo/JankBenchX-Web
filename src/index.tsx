@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn:
+    'https://b0d556396d10489d8ceac4e4dadb4b44@o370113.ingest.sentry.io/5213792',
+});
 
 const client = new ApolloClient({
   uri: 'https://graphql.fauna.com/graphql',
