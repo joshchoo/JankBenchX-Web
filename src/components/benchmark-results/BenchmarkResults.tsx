@@ -41,7 +41,7 @@ export const BenchmarkResults: React.FC = () => {
   }
 
   return (
-    <div className="mx-2">
+    <div className="">
       {data.allResults &&
         data.allResults.data &&
         data.allResults.data
