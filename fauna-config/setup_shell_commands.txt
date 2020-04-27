@@ -1,0 +1,8 @@
+CreateIndex({
+  name: "all_results_sort_by_newest_first",
+  source: Collection("Result"),
+  values: [
+    { field: ["ts"], reverse: true },
+    { field: ["ref"] }
+  ]
+})
