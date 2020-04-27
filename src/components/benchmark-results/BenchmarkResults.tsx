@@ -10,7 +10,7 @@ import { ErrorPage } from '../error-page/ErrorPage';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
   {
-    allResults {
+    sortedResults {
       data {
         _id
         device_name
@@ -42,18 +42,15 @@ export const BenchmarkResults: React.FC = () => {
 
   return (
     <div className="">
-      {data.allResults &&
-        data.allResults.data &&
-        data.allResults.data
-          .slice(0)
-          .reverse()
-          .map((result: Result) => (
-            <ResultTile
-              key={result._id}
-              result={result}
-              onClick={() => history.push(`/results/${result._id}`)}
-            />
-          ))}
+      {data.sortedResults &&
+        data.sortedResults.data &&
+        data.sortedResults.data.map((result: Result) => (
+          <ResultTile
+            key={result._id}
+            result={result}
+            onClick={() => history.push(`/results/${result._id}`)}
+          />
+        ))}
     </div>
   );
 };

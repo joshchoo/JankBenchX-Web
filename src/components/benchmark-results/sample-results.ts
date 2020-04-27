@@ -1,6 +1,6 @@
 export const result = {
   data: {
-    allResults: {
+    sortedResults: {
       data: [
         {
           _id: '8237489274829',
