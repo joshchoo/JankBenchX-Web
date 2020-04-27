@@ -6,3 +6,24 @@ CreateIndex({
     { field: ["ref"] }
   ]
 })
+
+CreateFunction({
+  name: "all_results_sort_by_newest_first",
+  body: Query(Lambda(["size", "after", "before"],
+    Let(
+      {
+        match: Match(Index("all_results_sort_by_newest_first")),
+        page: If(
+          Equals(Var("before"), null),
+          If(
+            Equals(Var("after"), null),
+              Paginate(Var("match"), { size: Var("size") }),
+              Paginate(Var("match"), { size: Var("size"), after: Var("after") })
+          ),
+          Paginate(Var("match"), { size: Var("size"), before: Var("before") }),
+        )
+      },
+      Map(Var("page"), Lambda("X", Get(Select([1], Var("X")))))
+    )
+  ))
+})

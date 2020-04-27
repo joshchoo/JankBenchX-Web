@@ -33,4 +33,6 @@ type Test @embedded {
 
 type Query {
   allResults: [Result]!
+  sortedResults: [Result]!
+    @resolver(name: "all_results_sort_by_newest_first", paginated: true)
 }
