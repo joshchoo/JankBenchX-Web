@@ -8,7 +8,7 @@ CreateIndex({
 })
 
 CreateFunction({
-  name: "all_results_sort_by_newest_first",
+  name: "sorted_results_newest_first",
   body: Query(Lambda(["size", "after", "before"],
     Let(
       {
