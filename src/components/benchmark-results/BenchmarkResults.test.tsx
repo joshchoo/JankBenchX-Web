@@ -9,6 +9,7 @@ import {
   GET_BENCHMARK_RESULTS_QUERY,
 } from './BenchmarkResults';
 import { result } from './sample-results';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 
 const mocks = [
   {
@@ -31,7 +32,7 @@ test('renders without error', () => {
 it('navigates to /results/{resultId} when a result tile is clicked', async () => {
   const history = createBrowserHistory();
 
-  const { getByText, findByText } = renderApollo(
+  const { getByText, getByTestId } = renderApollo(
     <Router history={history}>
       <BenchmarkResults />
     </Router>,
@@ -39,7 +40,7 @@ it('navigates to /results/{resultId} when a result tile is clicked', async () =>
   );
 
   // Wait for spinner to disappear
-  await findByText(/OnePlus6T/);
+  await waitForElementToBeRemoved(() => getByTestId('spinner'));
 
   fireEvent.click(getByText(/OnePlus6T/));
 
