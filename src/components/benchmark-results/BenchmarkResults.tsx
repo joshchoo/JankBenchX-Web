@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -42,6 +42,7 @@ export const BenchmarkResults: React.FC = () => {
       },
     }
   );
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   if (loading) return <LoadingSpinner />;
   if (error) {
@@ -54,6 +55,8 @@ export const BenchmarkResults: React.FC = () => {
 
   const onLoadMore = () => {
     if (!endOfPage) {
+      setIsLoadingMore(true);
+
       fetchMore({
         query: GET_BENCHMARK_RESULTS_QUERY,
         variables: { cursor: nextCursor },
@@ -72,6 +75,8 @@ export const BenchmarkResults: React.FC = () => {
             },
           };
 
+          setIsLoadingMore(false);
+
           return newObj;
         },
       });
@@ -85,6 +90,7 @@ export const BenchmarkResults: React.FC = () => {
           results={data.sortedResults.data}
           onLoadMore={onLoadMore}
           endOfPage={endOfPage}
+          isLoadingMore={isLoadingMore}
         />
       )}
     </div>
@@ -95,7 +101,26 @@ const BenchmarkResultsList: React.FC<any> = ({
   results,
   onLoadMore,
   history,
+  isLoadingMore,
 }) => {
+  useEffect(() => {
+    const onScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+          document.body.offsetHeight - 500 &&
+        results.length &&
+        !isLoadingMore
+      )
+        onLoadMore();
+    };
+
+    window.addEventListener('scroll', onScroll, false);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll, false);
+    };
+  }, [results.length, onLoadMore, isLoadingMore]);
+
   return (
     <div className="">
       {results.map((result: Result) => (
