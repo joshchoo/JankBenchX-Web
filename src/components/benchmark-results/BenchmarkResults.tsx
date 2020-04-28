@@ -80,12 +80,12 @@ export const BenchmarkResults: React.FC = () => {
   return (
     <div className="">
       {data.sortedResults && data.sortedResults.data && (
-        <BenchmarkResultsList
+        <BenchmarkResultsListWithPaginated
           results={data.sortedResults.data}
           onLoadMore={onLoadMore}
+          endOfPage={endOfPage}
         />
       )}
-      {!endOfPage && <button onClick={onLoadMore}>Load more</button>}
     </div>
   );
 };
@@ -105,3 +105,16 @@ const BenchmarkResultsList: React.FC<any> = ({ results, onLoadMore }) => {
     </div>
   );
 };
+
+const withPaginated = (Component: React.ComponentType) => (props: any) => {
+  return (
+    <div>
+      <Component {...props} />
+      {!props.endOfPage && (
+        <button onClick={props.onLoadMore}>Load more</button>
+      )}
+    </div>
+  );
+};
+
+const BenchmarkResultsListWithPaginated = withPaginated(BenchmarkResultsList);
