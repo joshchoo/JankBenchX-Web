@@ -43,6 +43,7 @@ export const BenchmarkResults: React.FC = () => {
     }
   );
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   if (loading) return <LoadingSpinner />;
   if (error) {
@@ -75,22 +76,30 @@ export const BenchmarkResults: React.FC = () => {
             },
           };
 
-          setIsLoadingMore(false);
-
           return newObj;
         },
-      });
+      })
+        .then(() => {
+          setIsError(false);
+        })
+        .catch(() => {
+          setIsError(true);
+        })
+        .finally(() => {
+          setIsLoadingMore(false);
+        });
     }
   };
 
   return (
-    <div className="">
+    <div className="pb-12">
       {data.sortedResults && data.sortedResults.data && (
         <AdvancedBenchmarkResultsList
           results={data.sortedResults.data}
           onLoadMore={onLoadMore}
           endOfPage={endOfPage}
           isLoadingMore={isLoadingMore}
+          isError={isError}
         />
       )}
     </div>
@@ -138,16 +147,17 @@ const withLoadingMore = (Component: React.ComponentType) => (props: any) => {
   return (
     <div className="flex flex-col items-center">
       <Component {...props} />
-      {props.isLoadingMore && <span>Loading...</span>}
+      {props.isLoadingMore && !props.isError && <div>Loading...</div>}
     </div>
   );
 };
 
 const withPaginated = (Component: React.ComponentType) => (props: any) => {
+  console.log(props);
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Component {...props} />
-      {!props.endOfPage && !props.isLoadingMore && (
+      {!props.isLoadingMore && props.isError && !props.endOfPage && (
         <button onClick={props.onLoadMore}>Load more</button>
       )}
     </div>
