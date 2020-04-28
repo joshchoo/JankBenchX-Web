@@ -134,6 +134,15 @@ const BenchmarkResultsList: React.FC<any> = ({
   );
 };
 
+const withLoadingMore = (Component: React.ComponentType) => (props: any) => {
+  return (
+    <div className="flex flex-col items-center">
+      <Component {...props} />
+      {props.isLoadingMore && <span>Loading...</span>}
+    </div>
+  );
+};
+
 const withPaginated = (Component: React.ComponentType) => (props: any) => {
   return (
     <div>
@@ -147,5 +156,6 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
 
 const AdvancedBenchmarkResultsList = compose<any, any>(
   withPaginated,
+  withLoadingMore,
   withRouter
 )(BenchmarkResultsList);
