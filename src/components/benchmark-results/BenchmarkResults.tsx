@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import * as Sentry from '@sentry/browser';
 
 import { ResultTile } from '../result-tile/ResultTile';
@@ -119,6 +120,7 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
   );
 };
 
-const AdvancedBenchmarkResultsList = withPaginated(
-  withRouter(BenchmarkResultsList)
-);
+const AdvancedBenchmarkResultsList = compose<any, any>(
+  withPaginated,
+  withRouter
+)(BenchmarkResultsList);
