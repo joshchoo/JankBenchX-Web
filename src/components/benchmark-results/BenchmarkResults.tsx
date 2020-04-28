@@ -9,8 +9,8 @@ import { Result } from '../../types';
 import { ErrorPage } from '../error-page/ErrorPage';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
-  {
-    sortedResults {
+  query SortedResults($cursor: String, $size: Int) {
+    sortedResults(_cursor: $cursor, _size: $size) {
       data {
         _id
         device_name
@@ -26,12 +26,22 @@ export const GET_BENCHMARK_RESULTS_QUERY = gql`
           bad_frame_pct
         }
       }
+      after
+      before
     }
   }
 `;
 
 export const BenchmarkResults: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_BENCHMARK_RESULTS_QUERY);
+  const { loading, error, data, fetchMore } = useQuery(
+    GET_BENCHMARK_RESULTS_QUERY,
+    {
+      variables: {
+        cursor: null,
+        size: 1,
+      },
+    }
+  );
   const history = useHistory();
 
   if (loading) return <LoadingSpinner />;
@@ -39,6 +49,32 @@ export const BenchmarkResults: React.FC = () => {
     Sentry.captureException(error);
     return <ErrorPage />;
   }
+
+  const { after: nextCursor } = data.sortedResults;
+
+  const onLoadMore = () => {
+    return fetchMore({
+      query: GET_BENCHMARK_RESULTS_QUERY,
+      variables: { cursor: nextCursor },
+      updateQuery: (previousResult: any, { fetchMoreResult }) => {
+        const previousEntry = previousResult.sortedResults;
+        const newBenchmarkResults = fetchMoreResult.sortedResults.data;
+        const newCursor = fetchMoreResult.sortedResults.after;
+        const prevCursor = fetchMoreResult.sortedResults.before;
+
+        const newObj = {
+          sortedResults: {
+            __typename: previousEntry.__typename,
+            after: newCursor,
+            before: prevCursor,
+            data: [...previousEntry.data, ...newBenchmarkResults],
+          },
+        };
+
+        return newObj;
+      },
+    });
+  };
 
   return (
     <div className="">
@@ -51,6 +87,7 @@ export const BenchmarkResults: React.FC = () => {
             onClick={() => history.push(`/results/${result._id}`)}
           />
         ))}
+      <button onClick={onLoadMore}>Load more</button>
     </div>
   );
 };
