@@ -20,7 +20,7 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
 
   return (
     <div
-      className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer"
+      className="shadow-xl mx-auto mt-5 mb-5 rounded bg-white max-w-sm sm:max-w-lg cursor-pointer transition ease-out duration-150 transform hover:-translate-y-2 hover:shadow-2xl"
       onClick={onClick}
     >
       <div className="">
