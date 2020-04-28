@@ -9,8 +9,8 @@ import { Result } from '../../types';
 import { ErrorPage } from '../error-page/ErrorPage';
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
-  query SortedResults($cursor: String, $size: Int) {
-    sortedResults(_cursor: $cursor, _size: $size) {
+  query SortedResults($cursor: String) {
+    sortedResults(_cursor: $cursor, _size: 10) {
       data {
         _id
         device_name
@@ -38,11 +38,9 @@ export const BenchmarkResults: React.FC = () => {
     {
       variables: {
         cursor: null,
-        size: 1,
       },
     }
   );
-  const history = useHistory();
 
   if (loading) return <LoadingSpinner />;
   if (error) {
@@ -53,7 +51,7 @@ export const BenchmarkResults: React.FC = () => {
   const { after: nextCursor } = data.sortedResults;
 
   const onLoadMore = () => {
-    return fetchMore({
+    fetchMore({
       query: GET_BENCHMARK_RESULTS_QUERY,
       variables: { cursor: nextCursor },
       updateQuery: (previousResult: any, { fetchMoreResult }) => {
@@ -61,6 +59,11 @@ export const BenchmarkResults: React.FC = () => {
         const newBenchmarkResults = fetchMoreResult.sortedResults.data;
         const newCursor = fetchMoreResult.sortedResults.after;
         const prevCursor = fetchMoreResult.sortedResults.before;
+
+        // Check for end of results
+        if (prevCursor === null) {
+          return previousResult;
+        }
 
         const newObj = {
           sortedResults: {
@@ -78,16 +81,29 @@ export const BenchmarkResults: React.FC = () => {
 
   return (
     <div className="">
-      {data.sortedResults &&
-        data.sortedResults.data &&
-        data.sortedResults.data.map((result: Result) => (
-          <ResultTile
-            key={result._id}
-            result={result}
-            onClick={() => history.push(`/results/${result._id}`)}
-          />
-        ))}
+      {data.sortedResults && data.sortedResults.data && (
+        <BenchmarkResultsList
+          results={data.sortedResults.data}
+          onLoadMore={onLoadMore}
+        />
+      )}
       <button onClick={onLoadMore}>Load more</button>
+    </div>
+  );
+};
+
+const BenchmarkResultsList: React.FC<any> = ({ results, onLoadMore }) => {
+  const history = useHistory();
+
+  return (
+    <div className="">
+      {results.map((result: Result) => (
+        <ResultTile
+          key={result._id}
+          result={result}
+          onClick={() => history.push(`/results/${result._id}`)}
+        />
+      ))}
     </div>
   );
 };

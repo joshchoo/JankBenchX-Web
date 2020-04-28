@@ -18,7 +18,6 @@ const mocks = [
       variables: {
         // mocked variable values must match the ones in BenchmarkResults.ts
         cursor: null,
-        size: 1,
       },
     },
     result: result,
