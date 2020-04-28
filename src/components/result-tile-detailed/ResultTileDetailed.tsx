@@ -79,7 +79,7 @@ export const ResultTileDetailed: React.FC<{
   ];
 
   return (
-    <div className="my-4 w-full max-w-sm rounded bg-white shadow-2xl sm:mx-6">
+    <div className="my-4 w-full max-w-sm rounded bg-white shadow-2xl sm:mx-6 hover:shadow-outline">
       <div className="p-3 text-center text-2xl">{test_name}</div>
       <div className="h-64 w-full flex justify-center items-center bg-gray-800">
         <FrameDetailsGraph

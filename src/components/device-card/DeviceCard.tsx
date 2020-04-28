@@ -22,7 +22,7 @@ export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
   const date = faunaTimestampToDate(_ts);
 
   return (
-    <div className="mx-auto mt-5 mb-5 max-w-sm shadow-2xl sm:max-w-2xl rounded bg-white">
+    <div className="mx-auto mt-5 mb-5 max-w-sm shadow-2xl sm:max-w-2xl rounded bg-white hover:shadow-outline">
       <div className="flex flex-row justify-between px-4 py-2 rounded-t bg-gray-900 text-gray-100">
         <div className="text-sm">{`ID: ${_id}`}</div>
         <div className="text-sm">
