@@ -138,7 +138,7 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
   return (
     <div>
       <Component {...props} />
-      {!props.endOfPage && (
+      {!props.endOfPage && !props.isLoadingMore && (
         <button onClick={props.onLoadMore}>Load more</button>
       )}
     </div>
