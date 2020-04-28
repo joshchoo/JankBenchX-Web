@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -106,30 +106,7 @@ export const BenchmarkResults: React.FC = () => {
   );
 };
 
-const BenchmarkResultsList: React.FC<any> = ({
-  results,
-  onLoadMore,
-  history,
-  isLoadingMore,
-}) => {
-  useEffect(() => {
-    const onScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 500 &&
-        results.length &&
-        !isLoadingMore
-      )
-        onLoadMore();
-    };
-
-    window.addEventListener('scroll', onScroll, false);
-
-    return () => {
-      window.removeEventListener('scroll', onScroll, false);
-    };
-  }, [results.length, onLoadMore, isLoadingMore]);
-
+const BenchmarkResultsList: React.FC<any> = ({ results, history }) => {
   return (
     <div className="">
       {results.map((result: Result) => (
@@ -153,7 +130,6 @@ const withLoadingMore = (Component: React.ComponentType) => (props: any) => {
 };
 
 const withPaginated = (Component: React.ComponentType) => (props: any) => {
-  console.log(props);
   return (
     <div className="flex flex-col items-center">
       <Component {...props} />
@@ -164,8 +140,38 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
   );
 };
 
+const withInfiniteScroll = (Component: React.ComponentType) => {
+  return class InfiniteScroll extends React.Component<any> {
+    componentDidMount() {
+      window.addEventListener('scroll', this.onScroll, false);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.onScroll, false);
+    }
+
+    onScroll = () => {
+      const { results, isLoadingMore, onLoadMore } = this.props;
+
+      if (
+        window.innerHeight + window.scrollY >=
+          document.body.offsetHeight - 500 &&
+        results.length &&
+        !isLoadingMore
+      ) {
+        onLoadMore();
+      }
+    };
+
+    render() {
+      return <Component {...this.props} />;
+    }
+  };
+};
+
 const AdvancedBenchmarkResultsList = compose<any, any>(
   withPaginated,
   withLoadingMore,
-  withRouter
+  withRouter,
+  withInfiniteScroll
 )(BenchmarkResultsList);
