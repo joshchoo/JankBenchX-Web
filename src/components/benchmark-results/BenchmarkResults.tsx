@@ -49,34 +49,32 @@ export const BenchmarkResults: React.FC = () => {
   }
 
   const { after: nextCursor } = data.sortedResults;
+  const endOfPage = nextCursor === null;
 
   const onLoadMore = () => {
-    fetchMore({
-      query: GET_BENCHMARK_RESULTS_QUERY,
-      variables: { cursor: nextCursor },
-      updateQuery: (previousResult: any, { fetchMoreResult }) => {
-        const previousEntry = previousResult.sortedResults;
-        const newBenchmarkResults = fetchMoreResult.sortedResults.data;
-        const newCursor = fetchMoreResult.sortedResults.after;
-        const prevCursor = fetchMoreResult.sortedResults.before;
+    if (!endOfPage) {
+      fetchMore({
+        query: GET_BENCHMARK_RESULTS_QUERY,
+        variables: { cursor: nextCursor },
+        updateQuery: (previousResult: any, { fetchMoreResult }) => {
+          const previousEntry = previousResult.sortedResults;
+          const newBenchmarkResults = fetchMoreResult.sortedResults.data;
+          const newCursor = fetchMoreResult.sortedResults.after;
+          const prevCursor = fetchMoreResult.sortedResults.before;
 
-        // Check for end of results
-        if (prevCursor === null) {
-          return previousResult;
-        }
+          const newObj = {
+            sortedResults: {
+              __typename: previousEntry.__typename,
+              after: newCursor,
+              before: prevCursor,
+              data: [...previousEntry.data, ...newBenchmarkResults],
+            },
+          };
 
-        const newObj = {
-          sortedResults: {
-            __typename: previousEntry.__typename,
-            after: newCursor,
-            before: prevCursor,
-            data: [...previousEntry.data, ...newBenchmarkResults],
-          },
-        };
-
-        return newObj;
-      },
-    });
+          return newObj;
+        },
+      });
+    }
   };
 
   return (
@@ -87,7 +85,7 @@ export const BenchmarkResults: React.FC = () => {
           onLoadMore={onLoadMore}
         />
       )}
-      <button onClick={onLoadMore}>Load more</button>
+      {!endOfPage && <button onClick={onLoadMore}>Load more</button>}
     </div>
   );
 };
