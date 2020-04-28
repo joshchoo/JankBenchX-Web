@@ -28,6 +28,8 @@ export const result = {
           ],
         },
       ],
+      after: null,
+      before: null,
     },
   },
 };

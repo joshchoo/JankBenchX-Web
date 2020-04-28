@@ -15,6 +15,11 @@ const mocks = [
   {
     request: {
       query: GET_BENCHMARK_RESULTS_QUERY,
+      variables: {
+        // mocked variable values must match the ones in BenchmarkResults.ts
+        cursor: null,
+        size: 1,
+      },
     },
     result: result,
   },
