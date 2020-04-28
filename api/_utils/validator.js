@@ -35,7 +35,6 @@ const testSchema = yup.object().shape({
   bad_frame_pct: faunaDouble.required(),
   total_frames: yup.number().integer().required(),
   ms_avg: faunaDouble.required(),
-  ms_0th_pctl: faunaDouble.required(),
   ms_10th_pctl: faunaDouble.required(),
   ms_20th_pctl: faunaDouble.required(),
   ms_30th_pctl: faunaDouble.required(),

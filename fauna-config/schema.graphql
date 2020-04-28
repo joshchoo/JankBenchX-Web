@@ -26,7 +26,6 @@ type Test @embedded {
   bad_frame_pct: Float!
   total_frames: Int!
   ms_avg: Float!
-  ms_0th_pctl: Float!
   ms_10th_pctl: Float!
   ms_20th_pctl: Float!
   ms_30th_pctl: Float!
