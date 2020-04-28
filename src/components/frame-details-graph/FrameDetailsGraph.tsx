@@ -53,7 +53,7 @@ export const FrameDetailsGraph: React.FC<{
             <Label
               value={`average (${avgMs.toFixed(2).toString()} ms)`}
               fill="white"
-              position="insideBottomLeft"
+              position="top"
             />
           }
           stroke="white"
