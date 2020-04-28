@@ -26,6 +26,15 @@ type Test @embedded {
   bad_frame_pct: Float!
   total_frames: Int!
   ms_avg: Float!
+  ms_0th_pctl: Float!
+  ms_10th_pctl: Float!
+  ms_20th_pctl: Float!
+  ms_30th_pctl: Float!
+  ms_40th_pctl: Float!
+  ms_50th_pctl: Float!
+  ms_60th_pctl: Float!
+  ms_70th_pctl: Float!
+  ms_80th_pctl: Float!
   ms_90th_pctl: Float!
   ms_95th_pctl: Float!
   ms_99th_pctl: Float!
