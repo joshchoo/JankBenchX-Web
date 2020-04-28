@@ -73,11 +73,15 @@ export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
         <div className="flex flex-col pl-4 pr-4 pb-2 pt-2">
           <div className="flex flex-col py-2">
             <div className="font-bold text-sm">Kernel Version</div>
-            <div className="text-sm">{kernel_version}</div>
+            <div className="text-sm" style={{ overflowWrap: 'break-word' }}>
+              {kernel_version}
+            </div>
           </div>
           <div className="flex flex-col py-2">
             <div className="font-bold text-sm">Fingerprint</div>
-            <div className="text-sm">{fingerprint}</div>
+            <div className="text-sm" style={{ overflowWrap: 'break-word' }}>
+              {fingerprint}
+            </div>
           </div>
           <div className="flex flex-col py-2">
             <div className="font-bold text-sm">Build Type</div>
