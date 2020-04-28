@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
 import { ResultTile } from '../result-tile/ResultTile';
@@ -80,7 +80,7 @@ export const BenchmarkResults: React.FC = () => {
   return (
     <div className="">
       {data.sortedResults && data.sortedResults.data && (
-        <BenchmarkResultsListWithPaginated
+        <AdvancedBenchmarkResultsList
           results={data.sortedResults.data}
           onLoadMore={onLoadMore}
           endOfPage={endOfPage}
@@ -90,9 +90,11 @@ export const BenchmarkResults: React.FC = () => {
   );
 };
 
-const BenchmarkResultsList: React.FC<any> = ({ results, onLoadMore }) => {
-  const history = useHistory();
-
+const BenchmarkResultsList: React.FC<any> = ({
+  results,
+  onLoadMore,
+  history,
+}) => {
   return (
     <div className="">
       {results.map((result: Result) => (
@@ -117,4 +119,6 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
   );
 };
 
-const BenchmarkResultsListWithPaginated = withPaginated(BenchmarkResultsList);
+const AdvancedBenchmarkResultsList = withPaginated(
+  withRouter(BenchmarkResultsList)
+);
