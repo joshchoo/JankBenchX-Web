@@ -1,5 +1,6 @@
 import React from 'react';
 import { TestAll } from '../../types';
+import { FrameDetailsGraph } from '../frame-details-graph/FrameDetailsGraph';
 
 export const ResultTileDetailed: React.FC<{
   testDetails: TestAll;
@@ -13,17 +14,79 @@ export const ResultTileDetailed: React.FC<{
     consistency_bonus,
     jank_penalty,
     ms_avg,
+    ms_10th_pctl,
+    ms_20th_pctl,
+    ms_30th_pctl,
+    ms_40th_pctl,
+    ms_50th_pctl,
+    ms_60th_pctl,
+    ms_70th_pctl,
+    ms_80th_pctl,
     ms_90th_pctl,
     ms_95th_pctl,
     ms_99th_pctl,
   } = testDetails;
 
+  const graphData = [
+    {
+      percentile: 0,
+      ms: ms_10th_pctl,
+    },
+    {
+      percentile: 10,
+      ms: ms_10th_pctl,
+    },
+    {
+      percentile: 20,
+      ms: ms_20th_pctl,
+    },
+    {
+      percentile: 30,
+      ms: ms_30th_pctl,
+    },
+    {
+      percentile: 40,
+      ms: ms_40th_pctl,
+    },
+    {
+      percentile: 50,
+      ms: ms_50th_pctl,
+    },
+    {
+      percentile: 60,
+      ms: ms_60th_pctl,
+    },
+    {
+      percentile: 70,
+      ms: ms_70th_pctl,
+    },
+    {
+      percentile: 80,
+      ms: ms_80th_pctl,
+    },
+    {
+      percentile: 90,
+      ms: ms_90th_pctl,
+    },
+    {
+      percentile: 95,
+      ms: ms_95th_pctl,
+    },
+    {
+      percentile: 99,
+      ms: ms_99th_pctl,
+    },
+  ];
+
   return (
     <div className="my-4 w-full max-w-sm rounded bg-white shadow-2xl sm:mx-6">
       <div className="p-3 text-center text-2xl">{test_name}</div>
-      {/* <div className=graph"></div> */}
-      <div className="h-64 w-full flex justify-center items-center bg-gray-800 text-gray-100">
-        Graph
+      <div className="h-64 w-full flex justify-center items-center bg-gray-800">
+        <FrameDetailsGraph
+          data={graphData}
+          avgMs={ms_avg}
+          refreshRate={refreshRate}
+        />
       </div>
       <div className="p-4 flex flex-row justify-around">
         <div className="flex flex-col justify-center items-center w-1/3">
@@ -45,7 +108,6 @@ export const ResultTileDetailed: React.FC<{
       </div>
       <div className="p-4 flex flex-row justify-around">
         <div className="flex flex-col justify-center items-center w-1/3">
-          {/* TODO: Replace 60 Hz with a variable */}
           <div className="text-xl">{refreshRate} Hz</div>
           <div className="text-sm">Refresh rate</div>
         </div>

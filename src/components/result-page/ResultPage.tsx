@@ -37,6 +37,14 @@ export const GET_RESULT = gql`
         jank_penalty
         consistency_bonus
         ms_avg
+        ms_10th_pctl
+        ms_20th_pctl
+        ms_30th_pctl
+        ms_40th_pctl
+        ms_50th_pctl
+        ms_60th_pctl
+        ms_70th_pctl
+        ms_80th_pctl
         ms_90th_pctl
         ms_95th_pctl
         ms_99th_pctl

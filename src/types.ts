@@ -45,6 +45,14 @@ export type TestAll = {
   jank_penalty: number;
   consistency_bonus: number;
   ms_avg: number;
+  ms_10th_pctl: number;
+  ms_20th_pctl: number;
+  ms_30th_pctl: number;
+  ms_40th_pctl: number;
+  ms_50th_pctl: number;
+  ms_60th_pctl: number;
+  ms_70th_pctl: number;
+  ms_80th_pctl: number;
   ms_90th_pctl: number;
   ms_95th_pctl: number;
   ms_99th_pctl: number;
