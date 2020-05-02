@@ -8,20 +8,7 @@ const client = new faunadb.Client({
 });
 
 module.exports = async (req, res) => {
-  if (req.method === 'GET') {
-    try {
-      // TODO: Return all data instead of paginated?
-      const response = await client.query(
-        q.Map(q.Paginate(q.Match(q.Index('allResults'))), (ref) => q.Get(ref))
-      );
-
-      const data = response.data;
-
-      return res.status(200).json({ results: data });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  } else if (req.method === 'POST') {
+  if (req.method === 'POST') {
     let data;
     try {
       data = await resultsSchema.validate(req.body, {
