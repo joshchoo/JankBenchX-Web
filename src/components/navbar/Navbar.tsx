@@ -33,12 +33,20 @@ export const Navbar: React.FC = () => {
           hidden ? 'hidden' : 'block'
         } flex-grow sm:flex sm:items-center sm:w-auto px-2`}
       >
-        <div className="text-sm sm:flex-grow">
+        <div className="text-sm">
           <Link
             to="/about"
             className="block mt-3 sm:inline-block sm:mt-0 text-gray-200 mr-4 px-2 py-1 rounded hover:bg-gray-800"
           >
             About
+          </Link>
+        </div>
+        <div className="text-sm sm:flex-grow">
+          <Link
+            to="/faq"
+            className="block mt-3 sm:inline-block sm:mt-0 text-gray-200 mr-4 px-2 py-1 rounded hover:bg-gray-800"
+          >
+            FAQ
           </Link>
         </div>
         <div className="px-2 py-2">

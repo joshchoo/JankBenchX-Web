@@ -8,6 +8,7 @@ import { NotFound } from './components/not-found/NotFound';
 
 import './App.css';
 import { AboutPage } from './components/about-page/AboutPage';
+import { FAQPage } from './components/faq-page/FAQPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={BenchmarkResults} />
         <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/faq" component={FAQPage} />
         <Route path="/results" component={ResultsOverview} />
         <Route component={NotFound} />
       </Switch>
