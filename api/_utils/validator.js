@@ -26,8 +26,19 @@ const faunaDouble = yup
   })
   .toDouble();
 
+const validTests = [
+  'Overdraw Test',
+  'Edit Text Input',
+  'High-hitrate text render',
+  'Image List View Fling',
+  'Bitmap Upload Test',
+  'Low-hitrate text render',
+  'List View Fling',
+  'Shadow Grid Fling',
+];
+
 const testSchema = yup.object().shape({
-  test_name: yup.string().max(80).required(),
+  test_name: yup.string().oneOf(validTests).required(),
   score: yup.number().integer().required(),
   jank_penalty: yup.number().integer().required(),
   consistency_bonus: yup.number().integer().required(),
