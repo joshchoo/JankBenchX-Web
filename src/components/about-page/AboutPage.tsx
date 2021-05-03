@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import React from "react";
+import ReactMarkdown from "react-markdown";
 
-import { PageLayout } from '../page-layout/PageLayout';
+import { PageLayout } from "../page-layout/PageLayout";
 
 const content = `
 # About
@@ -16,7 +16,7 @@ Feel free to check out my [website](https://joshuous.com/) and my works on [GitH
 export const AboutPage: React.FC = () => {
   return (
     <PageLayout>
-      <ReactMarkdown source={content} className="markdown-body" />
+      <ReactMarkdown className="markdown-body">{content}</ReactMarkdown>
     </PageLayout>
   );
 };
