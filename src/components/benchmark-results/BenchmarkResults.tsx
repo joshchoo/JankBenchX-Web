@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-import * as Sentry from '@sentry/browser';
+import React, { useState } from "react";
+import { useQuery, gql } from "@apollo/client";
+import { withRouter } from "react-router-dom";
+import * as Sentry from "@sentry/browser";
 
-import { ResultTile } from '../result-tile/ResultTile';
-import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
-import { Result } from '../../types';
-import { ErrorPage } from '../error-page/ErrorPage';
+import { ResultTile } from "../result-tile/ResultTile";
+import { LoadingSpinner } from "../loading-spinner/LoadingSpinner";
+import { Result } from "../../types";
+import { ErrorPage } from "../error-page/ErrorPage";
 
 export const GET_BENCHMARK_RESULTS_QUERY = gql`
   query SortedResults($cursor: String) {
@@ -34,14 +33,11 @@ export const GET_BENCHMARK_RESULTS_QUERY = gql`
 `;
 
 export const BenchmarkResults: React.FC = () => {
-  const { loading, error, data, fetchMore } = useQuery(
-    GET_BENCHMARK_RESULTS_QUERY,
-    {
-      variables: {
-        cursor: null,
-      },
-    }
-  );
+  const { loading, error, data, fetchMore } = useQuery(GET_BENCHMARK_RESULTS_QUERY, {
+    variables: {
+      cursor: null,
+    },
+  });
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -110,11 +106,7 @@ const BenchmarkResultsList: React.FC<any> = ({ results, history }) => {
   return (
     <div className="">
       {results.map((result: Result) => (
-        <ResultTile
-          key={result._id}
-          result={result}
-          onClick={() => history.push(`/results/${result._id}`)}
-        />
+        <ResultTile key={result._id} result={result} onClick={() => history.push(`/results/${result._id}`)} />
       ))}
     </div>
   );
@@ -143,22 +135,17 @@ const withPaginated = (Component: React.ComponentType) => (props: any) => {
 const withInfiniteScroll = (Component: React.ComponentType) => {
   return class InfiniteScroll extends React.Component<any> {
     componentDidMount() {
-      window.addEventListener('scroll', this.onScroll, false);
+      window.addEventListener("scroll", this.onScroll, false);
     }
 
     componentWillUnmount() {
-      window.removeEventListener('scroll', this.onScroll, false);
+      window.removeEventListener("scroll", this.onScroll, false);
     }
 
     onScroll = () => {
       const { results, isLoadingMore, onLoadMore } = this.props;
 
-      if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 500 &&
-        results.length &&
-        !isLoadingMore
-      ) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && results.length && !isLoadingMore) {
         onLoadMore();
       }
     };
@@ -169,9 +156,6 @@ const withInfiniteScroll = (Component: React.ComponentType) => {
   };
 };
 
-const AdvancedBenchmarkResultsList = compose<any, any>(
-  withPaginated,
-  withLoadingMore,
-  withRouter,
-  withInfiniteScroll
-)(BenchmarkResultsList);
+const AdvancedBenchmarkResultsList = withPaginated(
+  withLoadingMore(withRouter(withInfiniteScroll(BenchmarkResultsList)))
+);
