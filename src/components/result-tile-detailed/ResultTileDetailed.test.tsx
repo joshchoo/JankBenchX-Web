@@ -1,10 +1,10 @@
-import React from 'react';
-import { render } from '../../test-utils';
+import React from "react";
+import { render } from "../../test-utils";
 
-import { ResultTileDetailed } from './ResultTileDetailed';
+import { ResultTileDetailed } from "./ResultTileDetailed";
 
 const testDetails = {
-  test_name: 'List View Fling',
+  test_name: "List View Fling",
   score: 32,
   jank_penalty: 54,
   consistency_bonus: 50,
@@ -12,15 +12,21 @@ const testDetails = {
   bad_frame_pct: 32.7,
   total_frames: 9100,
   ms_avg: 9.76,
+  ms_10th_pctl: 8.01,
+  ms_20th_pctl: 8.01,
+  ms_30th_pctl: 8.01,
+  ms_40th_pctl: 8.01,
+  ms_50th_pctl: 8.01,
+  ms_60th_pctl: 8.01,
+  ms_70th_pctl: 8.01,
+  ms_80th_pctl: 8.01,
   ms_90th_pctl: 11.12,
   ms_95th_pctl: 18.54,
   ms_99th_pctl: 24.13,
 };
 
-it('renders without error and with correct data', () => {
-  const { getByText } = render(
-    <ResultTileDetailed testDetails={testDetails} refreshRate={90} />
-  );
+it("renders without error and with correct data", () => {
+  const { getByText } = render(<ResultTileDetailed testDetails={testDetails} refreshRate={90} />);
   expect(getByText(/List View Fling/i)).toBeInTheDocument();
   expect(getByText(/90 Hz/i)).toBeInTheDocument();
 });
