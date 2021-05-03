@@ -1,10 +1,8 @@
-import React from 'react';
-import { ResultAll } from '../../types';
-import { faunaTimestampToDate, formatDateTime } from '../../utils/datetime';
+import React from "react";
+import { ResultAll } from "../../types";
+import { faunaTimestampToDate, formatDateTime } from "../../utils/datetime";
 
-export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
-  deviceDetails,
-}) => {
+export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({ deviceDetails }) => {
   const {
     _id,
     _ts,
@@ -29,13 +27,10 @@ export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
           {`${formatDateTime(date)} - ${date
             .getUTCHours()
             .toString()
-            .padStart(2, '0')}:${date
+            .padStart(2, "0")}:${date
             .getUTCMinutes()
             .toString()
-            .padStart(2, '0')}:${date
-            .getUTCSeconds()
-            .toString()
-            .padStart(2, '0')}`}
+            .padStart(2, "0")}:${date.getUTCSeconds().toString().padStart(2, "0")}`}
         </div>
       </div>
       <div className="">
@@ -46,40 +41,32 @@ export const DeviceCard: React.FC<{ deviceDetails: ResultAll }> = ({
           </div>
           <div className="flex flex-col px-4 py-2">
             <div className="text-sm">Model</div>
-            <div className="text-lg lg:text-xl lg:font-bold">
-              {device_model}
-            </div>
+            <div className="text-lg lg:text-xl lg:font-bold">{device_model}</div>
           </div>
           <div className="flex flex-col px-4 py-2">
             <div className="text-sm">Board</div>
-            <div className="text-lg lg:text-xl lg:font-bold">
-              {device_board}
-            </div>
+            <div className="text-lg lg:text-xl lg:font-bold">{device_board}</div>
           </div>
           <div className="flex flex-col px-4 py-2">
             <div className="text-sm">Hardware</div>
-            <div className="text-lg lg:text-xl lg:font-bold">
-              {device_hardware}
-            </div>
+            <div className="text-lg lg:text-xl lg:font-bold">{device_hardware}</div>
           </div>
           <div className="flex flex-col px-4 py-2">
             <div className="text-sm">Android</div>
-            <div className="text-lg lg:text-xl lg:font-bold">
-              {android_version}
-            </div>
+            <div className="text-lg lg:text-xl lg:font-bold">{android_version}</div>
           </div>
         </div>
         <hr />
         <div className="flex flex-col pl-4 pr-4 pb-2 pt-2">
           <div className="flex flex-col py-2">
             <div className="font-bold text-sm">Kernel Version</div>
-            <div className="text-sm" style={{ overflowWrap: 'break-word' }}>
-              {kernel_version}
+            <div className="text-sm" style={{ overflowWrap: "break-word" }}>
+              {kernel_version || "N/A"}
             </div>
           </div>
           <div className="flex flex-col py-2">
             <div className="font-bold text-sm">Fingerprint</div>
-            <div className="text-sm" style={{ overflowWrap: 'break-word' }}>
+            <div className="text-sm" style={{ overflowWrap: "break-word" }}>
               {fingerprint}
             </div>
           </div>
