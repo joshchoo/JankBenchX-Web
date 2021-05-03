@@ -3,33 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.0.0-beta.44",
-    "@now/node": "^1.5.1",
-    "@sentry/browser": "^5.15.5",
+    "@apollo/client": "^3.3.16",
+    "@sentry/browser": "^6.3.5",
     "@tailwindcss/postcss7-compat": "^2.1.2",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.4",
-    "@types/recharts": "^1.8.10",
-    "@types/recompose": "^0.30.7",
+    "@vercel/node": "^1.10.0",
     "dotenv": "^8.2.0",
-    "faunadb": "^2.13.1",
-    "graphql": "^15.0.0",
-    "history": "^4.10.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-markdown": "^4.3.1",
-    "react-router-dom": "^5.1.2",
+    "faunadb": "^4.2.0",
+    "graphql": "^15.5.0",
+    "history": "^5.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-markdown": "^6.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "recharts": "^1.8.5",
+    "recharts": "^2.0.9",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^13.1.8",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.1",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/recharts": "^1.8.19",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "~3.7.2",
-    "yup": "^0.28.4"
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "NODE_ENV=development yarn run tailwind:css && react-scripts start",
@@ -52,6 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }
