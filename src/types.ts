@@ -3,7 +3,7 @@ export type Result = {
   device_name: string;
   device_model: string;
   device_board: string;
-  kernel_version: string;
+  kernel_version: string | null | undefined;
   fingerprint: string;
   _ts: number;
   results: Test[];
@@ -21,7 +21,7 @@ export type ResultAll = {
   device_name: string;
   device_model: string;
   device_board: string;
-  kernel_version: string;
+  kernel_version: string | null | undefined;
   fingerprint: string;
   build_type: string;
   device_hardware: string;

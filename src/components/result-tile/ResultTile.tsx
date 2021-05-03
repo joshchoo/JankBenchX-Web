@@ -1,6 +1,6 @@
-import React from 'react';
-import { Result } from '../../types';
-import { faunaTimestampToDate, formatDateTime } from '../../utils/datetime';
+import React from "react";
+import { Result } from "../../types";
+import { faunaTimestampToDate, formatDateTime } from "../../utils/datetime";
 
 const shortenKernelText = (kernelVersion: string) => {
   const kernelRegex = /[0-9]([^\s]+)/;
@@ -12,10 +12,7 @@ const shortenKernelText = (kernelVersion: string) => {
   }
 };
 
-export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
-  result,
-  onClick = () => {},
-}) => {
+export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({ result, onClick = () => {} }) => {
   const date = faunaTimestampToDate(result._ts);
 
   return (
@@ -26,9 +23,7 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
       <div className="">
         <div className="p-4 text-center rounded-t">
           <div className="text-2xl font-medium">{`${result.device_name} - ${result.device_model}`}</div>
-          <div className="text-sm">
-            {shortenKernelText(result.kernel_version)}
-          </div>
+          <div className="text-sm">{result.kernel_version ? shortenKernelText(result.kernel_version) : ""}</div>
         </div>
         <hr className="" />
         <div className="p-2">
@@ -38,24 +33,16 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
                 <th />
                 <th className="pr-2 text-right font-light">Score</th>
                 <th className="pr-2 text-right font-light">Jank Frames</th>
-                <th className="hidden pr-2 text-right font-light sm:table-cell">
-                  Bad Frames
-                </th>
+                <th className="hidden pr-2 text-right font-light sm:table-cell">Bad Frames</th>
               </tr>
             </thead>
             <tbody>
               {result.results.map((res) => {
                 return (
                   <tr key={res.test_name}>
-                    <td className="mr-auto px-2 py-1 sm:py-2">
-                      {res.test_name}
-                    </td>
-                    <td className="text-right text-xl font-bold pr-2">
-                      {res.score}
-                    </td>
-                    <td className="text-right text-xl font-bold pr-2">{`${res.jank_pct
-                      .toFixed(2)
-                      .toString()}%`}</td>
+                    <td className="mr-auto px-2 py-1 sm:py-2">{res.test_name}</td>
+                    <td className="text-right text-xl font-bold pr-2">{res.score}</td>
+                    <td className="text-right text-xl font-bold pr-2">{`${res.jank_pct.toFixed(2).toString()}%`}</td>
                     <td className="hidden text-right text-xl font-bold pr-2 sm:table-cell">
                       {`${res.bad_frame_pct.toFixed(2).toString()}%`}
                     </td>
@@ -72,10 +59,7 @@ export const ResultTile: React.FC<{ result: Result; onClick?: () => void }> = ({
           {`${formatDateTime(date)} - ${date
             .getUTCHours()
             .toString()
-            .padStart(2, '0')}:${date
-            .getUTCMinutes()
-            .toString()
-            .padStart(2, '0')}`}
+            .padStart(2, "0")}:${date.getUTCMinutes().toString().padStart(2, "0")}`}
         </div>
       </div>
     </div>
