@@ -7,10 +7,10 @@ const content = `
 # Frequently Asked Questions
 
 ### What is JankBench?
-JankBench is an UI benchmark app [developed by Google](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/tests/JankBench/). Compared with other benchmarks that evaluate a device's computational performance, JankBench measures a device's ability to display content smoothly [(UI Performance)](https://joshuous.com/posts/evaluating-performance/). Users tend to [perceive dropped frames (janks) more noticeably](https://source.android.com/devices/tech/debug/eval_perf) compared to a less obvious issue such as slightly slower application launch times.
+JankBench is an UI benchmark app [developed by Google](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/tests/JankBench/). Compared with other benchmarks that evaluate a device's computational performance, JankBench measures a device's ability to display content smoothly [(UI Performance)](https://joshchoo.com/posts/evaluating-performance/). Users tend to [perceive dropped frames (janks) more noticeably](https://source.android.com/devices/tech/debug/eval_perf) compared to a less obvious issue such as slightly slower application launch times.
 
 ### What is JankBenchX?
-[JankBench**X**](https://github.com/joshuous/jankbenchx) is an e-**X**-tended fork of the JankBench app that makes it easy for developers and users to store and share their results via the [JankBenchX Web App](https://jankbenchx.now.sh/). It adds the following features:
+[JankBench**X**](https://github.com/joshchoo/jankbenchx) is an e-**X**-tended fork of the JankBench app that makes it easy for developers and users to store and share their results via the [JankBenchX Web App](https://jankbenchx.now.sh/). It adds the following features:
 * Uploads results to JankBenchX Web APIs.
 - Calculates scores differently. Scores for each test are **aggregated** across all runs and then calculated. This differs from the original JankBench, which calculates results for each run and then averages them.
 - Calculates scores based on the device's display refresh rate. The original JankBench **assumes** device displays run at 60Hz, which does not reflect the actual jank deadline. On a device with 90Hz display, the scores calculated by JankBench would be too optimistic because of a false higher jank deadline. JankBenchX improves on this by checking the device's refresh rate before calculating the scores.
@@ -56,10 +56,10 @@ One way to interpret the **score** is that it considers a combination of consist
 JankBenchX cannot account for variable display refresh rates (e.g. Razer phone and Pixel 4). It assumes that your device uses a fixed display refresh rate.
 
 ### How do I contribute FAQs, suggestions, ideas, or bug reports?
-Fantastic! Please create a [Github issue here](https://github.com/joshuous/JankBenchX-Web/issues) with details.
+Fantastic! Please create a [Github issue here](https://github.com/joshchoo/JankBenchX-Web/issues) with details.
 
 ### How can I contribute code?
-You are welcomed to submit a pull request for the [Android app](https://github.com/joshuous/JankBenchX) or the [web app](https://github.com/joshuous/JankBenchX-Web). For info, the following tech stack is used:
+You are welcomed to submit a pull request for the [Android app](https://github.com/joshchoo/JankBenchX) or the [web app](https://github.com/joshchoo/JankBenchX-Web). For info, the following tech stack is used:
 
 - Android app: typical Java
 - Web Frontend: React + GraphQL
