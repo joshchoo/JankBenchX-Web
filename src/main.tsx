@@ -12,7 +12,7 @@ Sentry.init({
 const client = new ApolloClient({
   uri: "https://graphql.fauna.com/graphql",
   headers: {
-    authorization: `Bearer ${process.env.REACT_APP_FAUNA_CLIENT_KEY}`,
+    authorization: `Bearer ${import.meta.env.VITE_APP_FAUNA_CLIENT_KEY}`,
   },
   cache: new InMemoryCache(),
 });
