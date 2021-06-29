@@ -47,7 +47,7 @@
     "build": "NODE_ENV=production yarn run tailwind:css && tsc && vite build",
     "serve": "vite preview",
     "test": "tsc && jest",
-    "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css"
+    "tailwind:css": "tailwind build -i src/tailwind.css -c tailwind.config.js -o src/index.css"
   },
   "eslintConfig": {
     "extends": "react-app"
