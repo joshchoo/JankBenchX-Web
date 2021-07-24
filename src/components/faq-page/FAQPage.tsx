@@ -1,5 +1,5 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import Markdown from "markdown-to-jsx";
 
 import { PageLayout } from "../page-layout/PageLayout";
 
@@ -70,7 +70,7 @@ You are welcomed to submit a pull request for the [Android app](https://github.c
 export const FAQPage: React.FC = () => {
   return (
     <PageLayout>
-      <ReactMarkdown className="markdown-body">{content}</ReactMarkdown>
+      <Markdown className="markdown-body">{content}</Markdown>
     </PageLayout>
   );
 };
