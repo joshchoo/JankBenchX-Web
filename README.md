@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DEPRECATED
+
+This project is now deprecated as I no longer have the time to maintain it and fix breaking changes. Anyone is welcome to fork the project and maintain it. Thank you to all who have used JankbenchX and found it useful.
 
 ## Available Scripts
 
